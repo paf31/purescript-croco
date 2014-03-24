@@ -198,13 +198,19 @@ changeKeyState stateRef newState = do
     InProgress -> modifyRef stateRef $ \st -> st { keyState = newState }
     _ -> return {}
 
-handleKeyDown :: forall eff. RefVal GameState -> KeyCode -> Eff (ref :: Ref | eff) {}
-handleKeyDown stateRef 38 = changeKeyState stateRef MovingUp
-handleKeyDown stateRef 40 = changeKeyState stateRef MovingDown
-handleKeyDown _ _ = return {} 
+handleKeyDown :: forall eff. RefVal GameState -> KeyCode -> Eff (ref :: Ref | eff) Boolean
+handleKeyDown stateRef 38 = do
+  changeKeyState stateRef MovingUp
+  return false
+handleKeyDown stateRef 40 = do
+  changeKeyState stateRef MovingDown 
+  return false
+handleKeyDown _ _ = return true
 
-handleKeyUp :: forall eff. RefVal GameState -> KeyCode -> Eff (ref :: Ref | eff) {}
-handleKeyUp stateRef _ = changeKeyState stateRef NoKeyState
+handleKeyUp :: forall eff. RefVal GameState -> KeyCode -> Eff (ref :: Ref | eff) Boolean
+handleKeyUp stateRef _ = do
+  changeKeyState stateRef NoKeyState
+  return false
 
 -- |
 -- Rendering
@@ -307,21 +313,19 @@ foreign import onKeyDown
   "function onKeyDown(handler) {\
   \  return function() {\
   \    window.onkeydown = function(e) {\
-  \      handler(e.keyCode)();\
-  \      return false;\
+  \      return handler(e.keyCode)();\
   \    };\
   \  };\
-  \}" :: forall eff. (KeyCode -> Eff eff {}) -> Eff eff {}
+  \}" :: forall eff. (KeyCode -> Eff eff Boolean) -> Eff eff {}
 
 foreign import onKeyUp
   "function onKeyUp(handler) {\
   \  return function() {\
   \    window.onkeyup = function(e) {\
-  \      handler(e.keyCode)();\
-  \      return false;\
+  \      return handler(e.keyCode)();\
   \    };\
   \  };\
-  \}" :: forall eff. (KeyCode -> Eff eff {}) -> Eff eff {}
+  \}" :: forall eff. (KeyCode -> Eff eff Boolean) -> Eff eff {}
 
 main = do
   stateRef <- newRef defaultGameState
