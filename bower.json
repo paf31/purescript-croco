@@ -17,9 +17,8 @@
     "tests"
   ],
   "dependencies": {
-    "purescript-arrays": "*",
-    "purescript-maps": "*",
-    "purescript-refs": "*",
-    "purescript-tuples": "*"
-  }
+    "purescript-canvas": "*",
+    "purescript-strings": "*"
+  },
+  "homepage": "https://github.com/paf31/purescript-croco"
 }
