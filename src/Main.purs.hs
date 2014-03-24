@@ -1,7 +1,5 @@
 module Main where
 
-import Canvas
-
 import Data.Array
 import Data.Maybe
 import Data.Tuple
@@ -13,6 +11,8 @@ import Data.Monoid.First
 
 import Control.Monad.Eff
 import Control.Monad.Eff.Ref
+
+import Graphics.Canvas
 
 import qualified Data.Map as M
 

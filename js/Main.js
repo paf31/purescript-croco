@@ -48,7 +48,7 @@
         function onKeyDown(handler) {  return function() {    window.onkeydown = function(e) {      return handler(e.keyCode)();    };  };};
         function onKeyUp(handler) {  return function() {    window.onkeyup = function(e) {      return handler(e.keyCode)();    };  };};
         var square = function (ctx) {
-            return _ps.Canvas.fillRect(ctx)({
+            return _ps.Graphics_Canvas.fillRect(ctx)({
                 x: -1, 
                 y: -1, 
                 w: 2, 
@@ -182,7 +182,7 @@
             };
         };
         var circle = function (ctx) {
-            return _ps.Canvas.fillPath(ctx)(_ps.Canvas.arc(ctx)({
+            return _ps.Graphics_Canvas.fillPath(ctx)(_ps.Graphics_Canvas.arc(ctx)({
                 cx: 0.0, 
                 cy: 0.0, 
                 r: 1.0, 
@@ -281,11 +281,11 @@
             return function (c1) {
                 return function (c2) {
                     return function __do() {
-                        _ps.Canvas.setFillStyle(c1)(ctx)();
+                        _ps.Graphics_Canvas.setFillStyle(c1)(ctx)();
                         square(ctx)();
-                        _ps.Canvas.setFillStyle(c2)(ctx)();
-                        return _ps.Canvas.withContext(ctx)(function __do() {
-                            _ps.Canvas.scale({
+                        _ps.Graphics_Canvas.setFillStyle(c2)(ctx)();
+                        return _ps.Graphics_Canvas.withContext(ctx)(function __do() {
+                            _ps.Graphics_Canvas.scale({
                                 scaleX: 0.8, 
                                 scaleY: 0.8
                             })(ctx)();
@@ -313,12 +313,12 @@
             return function (m) {
                 return function __do() {
                     _ps.Data_Traversable["for"](_ps.Prelude.applicativeFromMonad(_ps.Control_Monad_Eff.monadEff({})))(_ps.Data_Traversable.traversableArray({}))(_ps.Data_Map.toList(m))(function (_1) {
-                        return _ps.Canvas.withContext(ctx)(function __do() {
-                            _ps.Canvas.translate({
+                        return _ps.Graphics_Canvas.withContext(ctx)(function __do() {
+                            _ps.Graphics_Canvas.translate({
                                 translateX: (_1.values[0]).values[0], 
                                 translateY: (_1.values[0]).values[1]
                             })(ctx)();
-                            _ps.Canvas.scale({
+                            _ps.Graphics_Canvas.scale({
                                 scaleX: 0.4, 
                                 scaleY: 0.4
                             })(ctx)();
@@ -427,13 +427,13 @@
         var ball = function (ctx) {
             return function (x) {
                 return function (y) {
-                    return _ps.Canvas.withContext(ctx)(function __do() {
-                        _ps.Canvas.translate({
+                    return _ps.Graphics_Canvas.withContext(ctx)(function __do() {
+                        _ps.Graphics_Canvas.translate({
                             translateX: x, 
                             translateY: y
                         })(ctx)();
-                        _ps.Canvas.setFillStyle("#0080ff")(ctx)();
-                        _ps.Canvas.scale({
+                        _ps.Graphics_Canvas.setFillStyle("#0080ff")(ctx)();
+                        _ps.Graphics_Canvas.scale({
                             scaleX: 0.3, 
                             scaleY: 0.3
                         })(ctx)();
@@ -538,23 +538,23 @@
                                 return (function (_3) {
                                     return function __do() {
                                         _ps.Control_Monad_Eff_Ref.writeRef(stateRef)(_3)();
-                                        _ps.Canvas.setFillStyle("#000000")(ctx)();
-                                        _ps.Canvas.clearRect(ctx)({
+                                        _ps.Graphics_Canvas.setFillStyle("#000000")(ctx)();
+                                        _ps.Graphics_Canvas.clearRect(ctx)({
                                             x: 0, 
                                             y: 0, 
                                             w: 200, 
                                             h: 200
                                         })();
-                                        _ps.Canvas.withContext(ctx)(function __do() {
-                                            _ps.Canvas.translate({
+                                        _ps.Graphics_Canvas.withContext(ctx)(function __do() {
+                                            _ps.Graphics_Canvas.translate({
                                                 translateX: 100, 
                                                 translateY: 100
                                             })(ctx)();
-                                            _ps.Canvas.scale({
+                                            _ps.Graphics_Canvas.scale({
                                                 scaleX: 20, 
                                                 scaleY: 20
                                             })(ctx)();
-                                            _ps.Canvas.translate({
+                                            _ps.Graphics_Canvas.translate({
                                                 translateX: -_3.posX, 
                                                 translateY: -_3.posY
                                             })(ctx)();
@@ -588,7 +588,7 @@
             onKeyDown(handleKeyDown(stateRef))();
             onKeyUp(handleKeyUp(stateRef))();
             var canvas = getElementById("canvas")();
-            var ctx = _ps.Canvas.getContext2D(canvas)();
+            var ctx = _ps.Graphics_Canvas.getContext2D(canvas)();
             return setInterval(10)(render(ctx)(stateRef))();
         };
         module.MovingUp = MovingUp;
