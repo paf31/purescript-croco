@@ -279,10 +279,10 @@ render ctx stateRef = do
   let state'' = state' { lastTime = Just time }
   writeRef stateRef state''
   setFillStyle "#000000" ctx
-  clearRect ctx { x: 0, y: 0, w: 200, h: 200 } 
+  clearRect ctx { x: 0, y: 0, w: 640, h: 480 } 
   withContext ctx $ do
-    translate { translateX: 100, translateY: 100 } ctx
-    scale { scaleX: 20, scaleY: 20 } ctx
+    translate { translateX: 320, translateY: 240 } ctx
+    scale { scaleX: 40, scaleY: 40 } ctx
     translate 
       { translateX: negate (state''.posX)
       , translateY: negate (state''.posY)

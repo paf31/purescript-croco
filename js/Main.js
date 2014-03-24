@@ -542,17 +542,17 @@
                                         _ps.Graphics_Canvas.clearRect(ctx)({
                                             x: 0, 
                                             y: 0, 
-                                            w: 200, 
-                                            h: 200
+                                            w: 640, 
+                                            h: 480
                                         })();
                                         _ps.Graphics_Canvas.withContext(ctx)(function __do() {
                                             _ps.Graphics_Canvas.translate({
-                                                translateX: 100, 
-                                                translateY: 100
+                                                translateX: 320, 
+                                                translateY: 240
                                             })(ctx)();
                                             _ps.Graphics_Canvas.scale({
-                                                scaleX: 20, 
-                                                scaleY: 20
+                                                scaleX: 40, 
+                                                scaleY: 40
                                             })(ctx)();
                                             _ps.Graphics_Canvas.translate({
                                                 translateX: -_3.posX, 
