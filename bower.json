@@ -1,0 +1,25 @@
+{
+  "name": "croco",
+  "version": "0.0.0",
+  "authors": [
+    "Phil Freeman <paf31@cantab.net>"
+  ],
+  "description": "A game based on Croco Magneto, written in PureScript",
+  "keywords": [
+    "purescript"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "purescript-arrays": "*",
+    "purescript-maps": "*",
+    "purescript-refs": "*",
+    "purescript-tuples": "*"
+  }
+}
