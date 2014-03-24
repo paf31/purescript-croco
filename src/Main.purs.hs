@@ -39,6 +39,8 @@ type Speed = Number
  
 type Coord = Number
 
+type KeyCode = Number
+
 type Maze = M.Map (Tuple Number Number) Brick 
  
 data GameStatus = InProgress | GameOver
@@ -67,7 +69,7 @@ defaultGameState =
   , speed      : 10.0
   , status     : InProgress 
   , keyState   : NoKeyState
-  , direction  : MovingRight
+  , direction  : MovingLeft
   }
 
 defaultMaze :: Maze
@@ -103,7 +105,7 @@ parseMaze ls =
     updateMaze :: Number -> Number -> Maze -> String -> Maze
     updateMaze r c m s = 
       let brick = charToBrick (charAt c s)
-      in maybe m (\b -> M.insert (Tuple r c) b m) brick
+      in maybe m (\b -> M.insert (Tuple c r) b m) brick
 
     charToBrick :: String -> Maybe Brick
     charToBrick "#" = Just White
@@ -122,7 +124,7 @@ checkCollision state (Tuple x y) =
     checkCollision' :: GameState -> Tuple Coord Coord -> Maybe (Tuple (Tuple Number Number) Brick)
     checkCollision' state p@(Tuple ix iy) = 
       let 
-        dx = ix - y
+        dx = ix - x
         dy = iy - y
         dist = Math.sqrt $ dx * dx + dy * dy 
       in if dist >= 0.7 then 
@@ -195,6 +197,14 @@ changeKeyState stateRef newState = do
   case state.status of 
     InProgress -> modifyRef stateRef $ \st -> st { keyState = newState }
     _ -> return {}
+
+handleKeyDown :: forall eff. RefVal GameState -> KeyCode -> Eff (ref :: Ref | eff) {}
+handleKeyDown stateRef 38 = changeKeyState stateRef MovingUp
+handleKeyDown stateRef 40 = changeKeyState stateRef MovingDown
+handleKeyDown _ _ = return {} 
+
+handleKeyUp :: forall eff. RefVal GameState -> KeyCode -> Eff (ref :: Ref | eff) {}
+handleKeyUp stateRef _ = changeKeyState stateRef NoKeyState
 
 -- |
 -- Rendering
@@ -293,8 +303,30 @@ foreign import setInterval
   \  };\
   \}" :: forall eff. Number -> Eff eff {} -> Eff eff {}
 
+foreign import onKeyDown
+  "function onKeyDown(handler) {\
+  \  return function() {\
+  \    window.onkeydown = function(e) {\
+  \      handler(e.keyCode)();\
+  \      return false;\
+  \    };\
+  \  };\
+  \}" :: forall eff. (KeyCode -> Eff eff {}) -> Eff eff {}
+
+foreign import onKeyUp
+  "function onKeyUp(handler) {\
+  \  return function() {\
+  \    window.onkeyup = function(e) {\
+  \      handler(e.keyCode)();\
+  \      return false;\
+  \    };\
+  \  };\
+  \}" :: forall eff. (KeyCode -> Eff eff {}) -> Eff eff {}
+
 main = do
   stateRef <- newRef defaultGameState
+  onKeyDown $ handleKeyDown stateRef
+  onKeyUp $ handleKeyUp stateRef
   canvas <- getElementById "canvas"
   ctx <- getContext2D canvas
   setInterval 10 $ render ctx stateRef
