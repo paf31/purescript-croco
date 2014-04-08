@@ -8,40 +8,44 @@
                 values: [ value0 ]
             };
         };
-        var showFirst_show = function (__dict_Show_0) {
-            return function (_1) {
-                return "First (" + _ps.Prelude.show(_ps.Data_Maybe.showMaybe(__dict_Show_0))(_1.values[0]) + ")";
-                throw "Failed pattern match";
+        var showFirst = function (__dict_Show_0) {
+            return {
+                "__superclasses": {}, 
+                show: function (_1) {
+                    return "First (" + _ps.Prelude.show(_ps.Data_Maybe.showMaybe(__dict_Show_0))(_1.values[0]) + ")";
+                }
             };
         };
-        var showFirst = function (_1) {
+        var semigroupFirst = function (_) {
             return {
-                show: showFirst_show(_1)
+                "__superclasses": {}, 
+                "<>": function (_1) {
+                    return function (_2) {
+                        if ((_1.values[0]).ctor === "Data.Maybe.Just") {
+                            return _1;
+                        };
+                        return _2;
+                    };
+                }
             };
         };
         var runFirst = function (_1) {
             return _1.values[0];
-            throw "Failed pattern match";
         };
-        var monoidFirst_mempty = First(_ps.Data_Maybe.Nothing);
-        var monoidFirst_$less$greater = function (_1) {
-            return function (_2) {
-                if ((_1.values[0]).ctor === "Data.Maybe.Just") {
-                    return _1;
-                };
-                return _2;
-                throw "Failed pattern match";
-            };
-        };
-        var monoidFirst = function (_1) {
+        var monoidFirst = function (_) {
             return {
-                mempty: monoidFirst_mempty, 
-                $less$greater: monoidFirst_$less$greater
+                "__superclasses": {
+                    "Prelude.Semigroup_0": function (_) {
+                        return semigroupFirst({});
+                    }
+                }, 
+                mempty: First(_ps.Data_Maybe.Nothing)
             };
         };
         module.First = First;
         module.runFirst = runFirst;
         module.showFirst = showFirst;
+        module.semigroupFirst = semigroupFirst;
         module.monoidFirst = monoidFirst;
         return module;
     })();

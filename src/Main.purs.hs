@@ -3,7 +3,7 @@ module Main where
 import Data.Array
 import Data.Maybe
 import Data.Tuple
-import Data.String
+import qualified Data.String as S
 import Data.Foldable
 import Data.Traversable
 import Data.Monoid
@@ -99,12 +99,12 @@ parseMaze ls =
     go r m (s : ss) = go (r + 1) (lineToMaze r 0 m s) ss
 
     lineToMaze :: Number -> Number -> Maze -> String -> Maze
-    lineToMaze _ c m s | c >= lengthS s = m
+    lineToMaze _ c m s | c >= S.length s = m
     lineToMaze r c m s = lineToMaze r (c + 1) (updateMaze r c m s) s
       
     updateMaze :: Number -> Number -> Maze -> String -> Maze
     updateMaze r c m s = 
-      let brick = charToBrick (charAt c s)
+      let brick = charToBrick (S.charAt c s)
       in maybe m (\b -> M.insert (Tuple c r) b m) brick
 
     charToBrick :: String -> Maybe Brick

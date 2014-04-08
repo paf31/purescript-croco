@@ -28,7 +28,7 @@
         var sqrt1_2 = Math.SQRT1_2;;
         var sqrt2   = Math.SQRT2;;
         module.sqrt2 = sqrt2;
-        module.sqrt1_2 = sqrt1_2;
+        module["sqrt1_2"] = sqrt1_2;
         module.pi = pi;
         module.log10e = log10e;
         module.log2e = log2e;

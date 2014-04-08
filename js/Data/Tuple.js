@@ -17,7 +17,6 @@
                     var _4 = _2.slice(1);
                     return (function (_1) {
                         return Tuple(_ps.Data_Array[":"]((_2[0]).values[0])(_1.values[0]))(_ps.Data_Array[":"]((_2[0]).values[1])(_1.values[1]));
-                        throw "Failed pattern match";
                     })(unzip(_4));
                 };
                 if (_2.length === 0) {
@@ -29,96 +28,74 @@
         var uncurry = function (_1) {
             return function (_2) {
                 return _1(_2.values[0])(_2.values[1]);
-                throw "Failed pattern match";
             };
         };
         var swap = function (_1) {
             return Tuple(_1.values[1])(_1.values[0]);
-            throw "Failed pattern match";
         };
         var snd = function (_1) {
             return _1.values[1];
-            throw "Failed pattern match";
         };
-        var showTuple_show = function (__dict_Show_0) {
+        var showTuple = function (__dict_Show_0) {
             return function (__dict_Show_1) {
-                return function (_1) {
-                    return "Tuple(" + _ps.Prelude.show(__dict_Show_0)(_1.values[0]) + ", " + _ps.Prelude.show(__dict_Show_1)(_1.values[1]) + ")";
-                    throw "Failed pattern match";
-                };
-            };
-        };
-        var showTuple = function (_1) {
-            return function (_2) {
                 return {
-                    show: showTuple_show(_1)(_2)
+                    "__superclasses": {}, 
+                    show: function (_1) {
+                        return "Tuple(" + _ps.Prelude.show(__dict_Show_0)(_1.values[0]) + ", " + _ps.Prelude.show(__dict_Show_1)(_1.values[1]) + ")";
+                    }
                 };
             };
         };
-        var ordTuple_compare = function (__dict_Ord_2) {
-            return function (__dict_Ord_3) {
-                return function (_1) {
-                    return function (_2) {
-                        return (function (_3, _4) {
-                            return (function (_1) {
-                                if (_1.ctor === "Prelude.EQ") {
-                                    return _ps.Prelude.compare(__dict_Ord_3)(_3.values[1])(_4.values[1]);
-                                };
-                                return _1;
-                                throw "Failed pattern match";
-                            })(_ps.Prelude.compare(__dict_Ord_2)(_3.values[0])(_4.values[0]));
-                            throw "Failed pattern match";
-                        })(_1, _2);
-                    };
-                };
-            };
-        };
-        var ordTuple = function (_1) {
-            return function (_2) {
-                return {
-                    compare: ordTuple_compare(_1)(_2)
-                };
-            };
-        };
-        var functorTuple_$less$dollar$greater = function (_1) {
-            return function (_2) {
-                return Tuple(_2.values[0])(_1(_2.values[1]));
-                throw "Failed pattern match";
-            };
-        };
-        var functorTuple = function (_1) {
+        var functorTuple = function (_) {
             return {
-                $less$dollar$greater: functorTuple_$less$dollar$greater
+                "__superclasses": {}, 
+                "<$>": function (_1) {
+                    return function (_2) {
+                        return Tuple(_2.values[0])(_1(_2.values[1]));
+                    };
+                }
             };
         };
         var fst = function (_1) {
             return _1.values[0];
-            throw "Failed pattern match";
         };
-        var eqTuple_$eq$eq = function (__dict_Eq_4) {
-            return function (__dict_Eq_5) {
-                return function (_1) {
-                    return function (_2) {
-                        return _ps.Prelude["=="](__dict_Eq_4)(_1.values[0])(_2.values[0]) && _ps.Prelude["=="](__dict_Eq_5)(_1.values[1])(_2.values[1]);
-                        throw "Failed pattern match";
-                    };
-                };
-            };
-        };
-        var eqTuple = function (_1) {
-            return function (_2) {
+        var eqTuple = function (__dict_Eq_5) {
+            return function (__dict_Eq_6) {
                 return {
-                    $eq$eq: eqTuple_$eq$eq(_1)(_2), 
-                    $div$eq: eqTuple_$div$eq(_1)(_2)
+                    "__superclasses": {}, 
+                    "==": function (_1) {
+                        return function (_2) {
+                            return _ps.Prelude["=="](__dict_Eq_5)(_1.values[0])(_2.values[0]) && _ps.Prelude["=="](__dict_Eq_6)(_1.values[1])(_2.values[1]);
+                        };
+                    }, 
+                    "/=": function (t1) {
+                        return function (t2) {
+                            return !_ps.Prelude["=="](eqTuple(__dict_Eq_5)(__dict_Eq_6))(t1)(t2);
+                        };
+                    }
                 };
             };
         };
-        var eqTuple_$div$eq = function (__dict_Eq_6) {
-            return function (__dict_Eq_7) {
-                return function (t1) {
-                    return function (t2) {
-                        return !_ps.Prelude["=="](eqTuple(__dict_Eq_6)(__dict_Eq_7))(t1)(t2);
-                    };
+        var ordTuple = function (__dict_Ord_2) {
+            return function (__dict_Ord_3) {
+                return {
+                    "__superclasses": {
+                        "Prelude.Eq_0": function (_) {
+                            return eqTuple(__dict_Ord_2["__superclasses"]["Prelude.Eq_0"]({}))(__dict_Ord_3["__superclasses"]["Prelude.Eq_0"]({}));
+                        }
+                    }, 
+                    compare: function (_1) {
+                        return function (_2) {
+                            return (function (_3, _4) {
+                                return (function (_1) {
+                                    if (_1.ctor === "Prelude.EQ") {
+                                        return _ps.Prelude.compare(__dict_Ord_3)(_3.values[1])(_4.values[1]);
+                                    };
+                                    return _1;
+                                })(_ps.Prelude.compare(__dict_Ord_2)(_3.values[0])(_4.values[0]));
+                            })(_1, _2);
+                        };
+                    }
                 };
             };
         };
@@ -127,6 +104,60 @@
                 return function (b) {
                     return f(Tuple(a)(b));
                 };
+            };
+        };
+        var applyTuple = function (__dict_Semigroup_8) {
+            return {
+                "__superclasses": {
+                    "Prelude.Functor_0": function (_) {
+                        return functorTuple({});
+                    }
+                }, 
+                "<*>": function (_1) {
+                    return function (_2) {
+                        return Tuple(_ps.Prelude["<>"](__dict_Semigroup_8)(_1.values[0])(_2.values[0]))(_1.values[1](_2.values[1]));
+                    };
+                }
+            };
+        };
+        var bindTuple = function (__dict_Semigroup_7) {
+            return {
+                "__superclasses": {
+                    "Prelude.Apply_0": function (_) {
+                        return applyTuple(__dict_Semigroup_7);
+                    }
+                }, 
+                ">>=": function (_1) {
+                    return function (_2) {
+                        return (function (_3, _4) {
+                            return (function (_1) {
+                                return Tuple(_ps.Prelude["<>"](__dict_Semigroup_7)(_3.values[0])(_1.values[0]))(_1.values[1]);
+                            })(_4(_3.values[1]));
+                        })(_1, _2);
+                    };
+                }
+            };
+        };
+        var applicativeTuple = function (__dict_Monoid_9) {
+            return {
+                "__superclasses": {
+                    "Prelude.Apply_0": function (_) {
+                        return applyTuple(__dict_Monoid_9["__superclasses"]["Prelude.Semigroup_0"]({}));
+                    }
+                }, 
+                pure: Tuple(_ps.Data_Monoid.mempty(__dict_Monoid_9))
+            };
+        };
+        var monadTuple = function (__dict_Monoid_4) {
+            return {
+                "__superclasses": {
+                    "Prelude.Applicative_0": function (_) {
+                        return applicativeTuple(__dict_Monoid_4);
+                    }, 
+                    "Prelude.Bind_1": function (_) {
+                        return bindTuple(__dict_Monoid_4["__superclasses"]["Prelude.Semigroup_0"]({}));
+                    }
+                }
             };
         };
         module.Tuple = Tuple;
@@ -141,6 +172,10 @@
         module.eqTuple = eqTuple;
         module.ordTuple = ordTuple;
         module.functorTuple = functorTuple;
+        module.applyTuple = applyTuple;
+        module.applicativeTuple = applicativeTuple;
+        module.bindTuple = bindTuple;
+        module.monadTuple = monadTuple;
         return module;
     })();
 })((typeof module !== "undefined" && module.exports) ? module.exports : (typeof window !== "undefined") ? window.PS = window.PS || {} : (function () {

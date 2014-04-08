@@ -31,9 +31,9 @@
             return function (action) {
                 return function __do() {
                     save(ctx)();
-                    var a = action();
+                    var _1 = action();
                     restore(ctx)();
-                    return a;
+                    return _1;
                 };
             };
         };
@@ -41,9 +41,9 @@
             return function (path) {
                 return function __do() {
                     beginPath(ctx)();
-                    var a = path();
+                    var _1 = path();
                     stroke(ctx)();
-                    return a;
+                    return _1;
                 };
             };
         };
@@ -51,9 +51,9 @@
             return function (path) {
                 return function __do() {
                     beginPath(ctx)();
-                    var a = path();
+                    var _1 = path();
                     fill(ctx)();
-                    return a;
+                    return _1;
                 };
             };
         };

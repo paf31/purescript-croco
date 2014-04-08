@@ -55,53 +55,51 @@
                 h: 2
             });
         };
-        var showBrick_show = function (_1) {
-            if (_1.ctor === "Main.White") {
-                return "White";
-            };
-            if (_1.ctor === "Main.Green") {
-                return "Green";
-            };
-            if (_1.ctor === "Main.Red") {
-                return "Red";
-            };
-            throw "Failed pattern match";
-        };
-        var showBrick = function (_1) {
+        var showBrick = function (_) {
             return {
-                show: showBrick_show
+                "__superclasses": {}, 
+                show: function (_1) {
+                    if (_1.ctor === "Main.White") {
+                        return "White";
+                    };
+                    if (_1.ctor === "Main.Green") {
+                        return "Green";
+                    };
+                    if (_1.ctor === "Main.Red") {
+                        return "Red";
+                    };
+                    throw "Failed pattern match";
+                }
             };
         };
-        var eqBrick_$eq$eq = function (_1) {
-            return function (_2) {
-                if (_1.ctor === "Main.White") {
-                    if (_2.ctor === "Main.White") {
-                        return true;
-                    };
-                };
-                if (_1.ctor === "Main.Green") {
-                    if (_2.ctor === "Main.Green") {
-                        return true;
-                    };
-                };
-                if (_1.ctor === "Main.Red") {
-                    if (_2.ctor === "Main.Red") {
-                        return true;
-                    };
-                };
-                return false;
-                throw "Failed pattern match";
-            };
-        };
-        var eqBrick = function (_1) {
+        var eqBrick = function (_) {
             return {
-                $eq$eq: eqBrick_$eq$eq, 
-                $div$eq: eqBrick_$div$eq
-            };
-        };
-        var eqBrick_$div$eq = function (x) {
-            return function (y) {
-                return !_ps.Prelude["=="](eqBrick({}))(x)(y);
+                "__superclasses": {}, 
+                "==": function (_1) {
+                    return function (_2) {
+                        if (_1.ctor === "Main.White") {
+                            if (_2.ctor === "Main.White") {
+                                return true;
+                            };
+                        };
+                        if (_1.ctor === "Main.Green") {
+                            if (_2.ctor === "Main.Green") {
+                                return true;
+                            };
+                        };
+                        if (_1.ctor === "Main.Red") {
+                            if (_2.ctor === "Main.Red") {
+                                return true;
+                            };
+                        };
+                        return false;
+                    };
+                }, 
+                "/=": function (x) {
+                    return function (y) {
+                        return !_ps.Prelude["=="](eqBrick({}))(x)(y);
+                    };
+                }
             };
         };
         var collide = function (_1) {
@@ -193,60 +191,55 @@
         var checkCollision = function (_1) {
             return function (_2) {
                 return (function (_4, _5) {
-                    return (function () {
-                        var nearestBrick = function (_1) {
-                            return function (_2) {
-                                return function (_3) {
-                                    if (_1.ctor === "Main.MovingLeft") {
-                                        return _ps.Data_Tuple.Tuple(_ps.Math.floor(_2))(_ps.Math.round(_3));
-                                    };
-                                    if (_1.ctor === "Main.MovingRight") {
-                                        return _ps.Data_Tuple.Tuple(_ps.Math.ceil(_2))(_ps.Math.round(_3));
-                                    };
-                                    throw "Failed pattern match";
+                    var nearestBrick = function (_1) {
+                        return function (_2) {
+                            return function (_3) {
+                                if (_1.ctor === "Main.MovingLeft") {
+                                    return _ps.Data_Tuple.Tuple(_ps.Math.floor(_2))(_ps.Math.round(_3));
                                 };
-                            };
-                        };
-                        var checkCollision$prime = function (_1) {
-                            return function (_2) {
-                                return (function () {
-                                    var dy = _2.values[1] - _5.values[1];
-                                    var dx = _2.values[0] - _5.values[0];
-                                    var dist = _ps.Math.sqrt(dx * dx + dy * dy);
-                                    return (dist >= 0.7) ? _ps.Data_Maybe.Nothing : _ps.Prelude["<$>"](_ps.Prelude.functorFromApplicative(_ps.Prelude.applicativeFromMonad(_ps.Data_Maybe.monadMaybe({}))))(_ps.Data_Tuple.Tuple(_2))(_ps.Data_Map.lookup(_ps.Data_Tuple.eqTuple(_ps.Prelude.eqNumber({}))(_ps.Prelude.eqNumber({})))(_ps.Data_Tuple.ordTuple(_ps.Prelude.ordNumber({}))(_ps.Prelude.ordNumber({})))(_2)(_1.maze));
-                                })();
+                                if (_1.ctor === "Main.MovingRight") {
+                                    return _ps.Data_Tuple.Tuple(_ps.Math.ceil(_2))(_ps.Math.round(_3));
+                                };
                                 throw "Failed pattern match";
                             };
                         };
-                        return (function (_1) {
-                            return _ps.Prelude["<<<"](_ps.Prelude.categoryArr({}))(_ps.Data_Monoid_First.runFirst)(_ps.Data_Foldable.mconcat(_ps.Data_Foldable.foldableArray({}))(_ps.Data_Monoid_First.monoidFirst({})))(_ps.Data_Array.map(_ps.Data_Monoid_First.First)([ checkCollision$prime(_4)(_ps.Data_Tuple.Tuple(_1.values[0])(_1.values[1])), checkCollision$prime(_4)(_ps.Data_Tuple.Tuple(_1.values[0])(_1.values[1] - 1)), checkCollision$prime(_4)(_ps.Data_Tuple.Tuple(_1.values[0])(_1.values[1] + 1)) ]));
-                            throw "Failed pattern match";
-                        })(nearestBrick(_4.direction)(_5.values[0])(_5.values[1]));
-                    })();
-                    throw "Failed pattern match";
+                    };
+                    var checkCollision$prime = function (_1) {
+                        return function (_2) {
+                            var dy = _2.values[1] - _5.values[1];
+                            var dx = _2.values[0] - _5.values[0];
+                            var dist = _ps.Math.sqrt(dx * dx + dy * dy);
+                            return (dist >= 0.7) ? _ps.Data_Maybe.Nothing : _ps.Prelude["<$>"](_ps.Data_Maybe.functorMaybe({}))(_ps.Data_Tuple.Tuple(_2))(_ps.Data_Map.lookup(_ps.Data_Tuple.eqTuple(_ps.Prelude.eqNumber({}))(_ps.Prelude.eqNumber({})))(_ps.Data_Tuple.ordTuple(_ps.Prelude.ordNumber({}))(_ps.Prelude.ordNumber({})))(_2)(_1.maze));
+                        };
+                    };
+                    return (function (_1) {
+                        return _ps.Prelude["<<<"](_ps.Prelude.categoryArr({}))(_ps.Data_Monoid_First.runFirst)(_ps.Data_Foldable.mconcat(_ps.Data_Foldable.foldableArray({}))(_ps.Data_Monoid_First.monoidFirst({})))(_ps.Data_Array.map(_ps.Data_Monoid_First.First)([ checkCollision$prime(_4)(_ps.Data_Tuple.Tuple(_1.values[0])(_1.values[1])), checkCollision$prime(_4)(_ps.Data_Tuple.Tuple(_1.values[0])(_1.values[1] - 1)), checkCollision$prime(_4)(_ps.Data_Tuple.Tuple(_1.values[0])(_1.values[1] + 1)) ]));
+                    })(nearestBrick(_4.direction)(_5.values[0])(_5.values[1]));
                 })(_1, _2);
             };
         };
         var changeKeyState = function (stateRef) {
             return function (newState) {
                 return function __do() {
-                    var state = _ps.Control_Monad_Eff_Ref.readRef(stateRef)();
-                    return (function (_1) {
-                        if (_1.ctor === "Main.InProgress") {
-                            return _ps.Control_Monad_Eff_Ref.modifyRef(stateRef)(function (st) {
-                                var _1 = {};
-                                for (var _2 in st) {
-                                    if (st.hasOwnProperty(_2)) {
-                                        _1[_2] = st[_2];
+                    var _1 = _ps.Control_Monad_Eff_Ref.readRef(stateRef)();
+                    return (function (_2) {
+                        var state = _2;
+                        return (function (_1) {
+                            if (_1.ctor === "Main.InProgress") {
+                                return _ps.Control_Monad_Eff_Ref.modifyRef(stateRef)(function (st) {
+                                    var _1 = {};
+                                    for (var _2 in st) {
+                                        if (st.hasOwnProperty(_2)) {
+                                            _1[_2] = st[_2];
+                                        };
                                     };
-                                };
-                                _1.keyState = newState;
-                                return _1;
-                            });
-                        };
-                        return _ps.Prelude["return"](_ps.Control_Monad_Eff.monadEff({}))({});
-                        throw "Failed pattern match";
-                    })(state.status)();
+                                    _1.keyState = newState;
+                                    return _1;
+                                });
+                            };
+                            return _ps.Prelude["return"](_ps.Control_Monad_Eff.monadEff({}))({});
+                        })(state.status);
+                    })(_1)();
                 };
             };
         };
@@ -265,7 +258,6 @@
                     };
                 };
                 return _ps.Prelude["return"](_ps.Control_Monad_Eff.monadEff({}))(true);
-                throw "Failed pattern match";
             };
         };
         var handleKeyUp = function (_1) {
@@ -274,7 +266,6 @@
                     changeKeyState(_1)(NoKeyState)();
                     return false;
                 };
-                throw "Failed pattern match";
             };
         };
         var box = function (ctx) {
@@ -312,7 +303,7 @@
         var maze = function (ctx) {
             return function (m) {
                 return function __do() {
-                    _ps.Data_Traversable["for"](_ps.Prelude.applicativeFromMonad(_ps.Control_Monad_Eff.monadEff({})))(_ps.Data_Traversable.traversableArray({}))(_ps.Data_Map.toList(m))(function (_1) {
+                    _ps.Data_Traversable["for"](_ps.Control_Monad_Eff.functorEff({}))(_ps.Control_Monad_Eff.applicativeEff({}))(_ps.Data_Traversable.traversableArray({}))(_ps.Data_Map.toList(m))(function (_1) {
                         return _ps.Graphics_Canvas.withContext(ctx)(function __do() {
                             _ps.Graphics_Canvas.translate({
                                 translateX: (_1.values[0]).values[0], 
@@ -324,7 +315,6 @@
                             })(ctx)();
                             return brick(ctx)(_1.values[1])();
                         });
-                        throw "Failed pattern match";
                     })();
                     return ctx;
                 };
@@ -342,7 +332,6 @@
                     return _ps.Data_Maybe.Just(Green);
                 };
                 return _ps.Data_Maybe.Nothing;
-                throw "Failed pattern match";
             };
             var updateMaze = function (r) {
                 return function (c) {
@@ -368,7 +357,7 @@
                                 var c = _2;
                                 var m = _3;
                                 var s = _4;
-                                if (c >= _ps.Data_String.lengthS(s)) {
+                                if (c >= _ps.Data_String.length(s)) {
                                     return m;
                                 };
                                 var __tco__1 = _1;
@@ -380,7 +369,6 @@
                                 _3 = __tco__3;
                                 _4 = __tco__4;
                                 continue tco;
-                                throw "Failed pattern match";
                             };
                         };
                     };
@@ -509,7 +497,6 @@
                         };
                         throw "Failed pattern match";
                     })(checkCollision(state)(p));
-                    throw "Failed pattern match";
                 })(moveBall(state)(elapsed));
             };
         };
@@ -527,69 +514,70 @@
         var render = function (ctx) {
             return function (stateRef) {
                 return function __do() {
-                    var state = _ps.Control_Monad_Eff_Ref.readRef(stateRef)();
-                    var time = getMillis();
-                    return (function (_1) {
-                        var lastTime = _1;
-                        return (function (_1) {
-                            var elapsedTime = _1;
-                            return (function (_1) {
-                                var state$prime = _1;
-                                return (function (_3) {
-                                    return function __do() {
-                                        _ps.Control_Monad_Eff_Ref.writeRef(stateRef)(_3)();
-                                        _ps.Graphics_Canvas.setFillStyle("#000000")(ctx)();
-                                        _ps.Graphics_Canvas.clearRect(ctx)({
-                                            x: 0, 
-                                            y: 0, 
-                                            w: 640, 
-                                            h: 480
+                    var _2 = _ps.Control_Monad_Eff_Ref.readRef(stateRef)();
+                    return (function (_3) {
+                        return function __do() {
+                            var _1 = getMillis();
+                            return (function (_2) {
+                                var time = _2;
+                                return (function () {
+                                    var elapsedTime = _ps.Data_Maybe.maybe(0)(_ps.Prelude.id(_ps.Prelude.categoryArr({})))(_ps.Prelude["<$>"](_ps.Data_Maybe.functorMaybe({}))(_ps.Prelude["-"](_ps.Prelude.numNumber({}))(time))(_3.lastTime));
+                                    return (function () {
+                                        var state$prime = tick(_3)(elapsedTime);
+                                        return (function () {
+                                            var state$prime$prime = (function () {
+                                                var _1 = {};
+                                                for (var _2 in state$prime) {
+                                                    if (state$prime.hasOwnProperty(_2)) {
+                                                        _1[_2] = state$prime[_2];
+                                                    };
+                                                };
+                                                _1.lastTime = _ps.Data_Maybe.Just(time);
+                                                return _1;
+                                            })();
+                                            return function __do() {
+                                                _ps.Control_Monad_Eff_Ref.writeRef(stateRef)(state$prime$prime)();
+                                                _ps.Graphics_Canvas.setFillStyle("#000000")(ctx)();
+                                                _ps.Graphics_Canvas.clearRect(ctx)({
+                                                    x: 0, 
+                                                    y: 0, 
+                                                    w: 640, 
+                                                    h: 480
+                                                })();
+                                                _ps.Graphics_Canvas.withContext(ctx)(function __do() {
+                                                    _ps.Graphics_Canvas.translate({
+                                                        translateX: 320, 
+                                                        translateY: 240
+                                                    })(ctx)();
+                                                    _ps.Graphics_Canvas.scale({
+                                                        scaleX: 40, 
+                                                        scaleY: 40
+                                                    })(ctx)();
+                                                    _ps.Graphics_Canvas.translate({
+                                                        translateX: -state$prime$prime.posX, 
+                                                        translateY: -state$prime$prime.posY
+                                                    })(ctx)();
+                                                    maze(ctx)(state$prime$prime.maze)();
+                                                    return ball(ctx)(state$prime$prime.posX)(state$prime$prime.posY)();
+                                                })();
+                                                return {};
+                                            };
                                         })();
-                                        _ps.Graphics_Canvas.withContext(ctx)(function __do() {
-                                            _ps.Graphics_Canvas.translate({
-                                                translateX: 320, 
-                                                translateY: 240
-                                            })(ctx)();
-                                            _ps.Graphics_Canvas.scale({
-                                                scaleX: 40, 
-                                                scaleY: 40
-                                            })(ctx)();
-                                            _ps.Graphics_Canvas.translate({
-                                                translateX: -_3.posX, 
-                                                translateY: -_3.posY
-                                            })(ctx)();
-                                            maze(ctx)(_3.maze)();
-                                            return ball(ctx)(_3.posX)(_3.posY)();
-                                        })();
-                                        return {};
-                                    };
-                                    throw "Failed pattern match";
-                                })((function () {
-                                    var _1 = {};
-                                    for (var _2 in state$prime) {
-                                        if (state$prime.hasOwnProperty(_2)) {
-                                            _1[_2] = state$prime[_2];
-                                        };
-                                    };
-                                    _1.lastTime = _ps.Data_Maybe.Just(time);
-                                    return _1;
-                                })());
-                                throw "Failed pattern match";
-                            })(tick(state)(elapsedTime));
-                            throw "Failed pattern match";
-                        })(_ps.Data_Maybe.maybe(0)(_ps.Prelude.id(_ps.Prelude.categoryArr({})))(_ps.Prelude["<$>"](_ps.Prelude.functorFromApplicative(_ps.Prelude.applicativeFromMonad(_ps.Data_Maybe.monadMaybe({}))))(_ps.Prelude["-"](_ps.Prelude.numNumber({}))(time))(lastTime)));
-                        throw "Failed pattern match";
-                    })(state.lastTime)();
+                                    })();
+                                })();
+                            })(_1)();
+                        };
+                    })(_2)();
                 };
             };
         };
         var main = function __do() {
-            var stateRef = _ps.Control_Monad_Eff_Ref.newRef(defaultGameState)();
-            onKeyDown(handleKeyDown(stateRef))();
-            onKeyUp(handleKeyUp(stateRef))();
-            var canvas = getElementById("canvas")();
-            var ctx = _ps.Graphics_Canvas.getContext2D(canvas)();
-            return setInterval(10)(render(ctx)(stateRef))();
+            var _3 = _ps.Control_Monad_Eff_Ref.newRef(defaultGameState)();
+            onKeyDown(handleKeyDown(_3))();
+            onKeyUp(handleKeyUp(_3))();
+            var _2 = getElementById("canvas")();
+            var _1 = _ps.Graphics_Canvas.getContext2D(_2)();
+            return setInterval(10)(render(_1)(_3))();
         };
         module.MovingUp = MovingUp;
         module.MovingDown = MovingDown;

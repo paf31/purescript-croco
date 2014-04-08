@@ -15,53 +15,50 @@
             values: [  ]
         };
         function id(dict) {
-            return dict.id;
+            return dict["id"];
         };
         function $less$less$less(dict) {
-            return dict.$less$less$less;
+            return dict["<<<"];
         };
         function show(dict) {
-            return dict.show;
+            return dict["show"];
         };
         function showNumberImpl(n) {  return n.toString();};
         function $less$dollar$greater(dict) {
-            return dict.$less$dollar$greater;
-        };
-        function pure(dict) {
-            return dict.pure;
+            return dict["<$>"];
         };
         function $less$times$greater(dict) {
-            return dict.$less$times$greater;
+            return dict["<*>"];
+        };
+        function pure(dict) {
+            return dict["pure"];
         };
         function empty(dict) {
-            return dict.empty;
+            return dict["empty"];
         };
         function $less$bar$greater(dict) {
-            return dict.$less$bar$greater;
-        };
-        function $$return(dict) {
-            return dict.$$return;
+            return dict["<|>"];
         };
         function $greater$greater$eq(dict) {
-            return dict.$greater$greater$eq;
+            return dict[">>="];
         };
         function $plus(dict) {
-            return dict.$plus;
+            return dict["+"];
         };
         function $minus(dict) {
-            return dict.$minus;
+            return dict["-"];
         };
         function $times(dict) {
-            return dict.$times;
+            return dict["*"];
         };
         function $div(dict) {
-            return dict.$div;
+            return dict["/"];
         };
         function $percent(dict) {
-            return dict.$percent;
+            return dict["%"];
         };
         function negate(dict) {
-            return dict.negate;
+            return dict["negate"];
         };
         function numAdd(n1) {  return function(n2) {    return n1 + n2;  };};
         function numSub(n1) {  return function(n2) {    return n1 - n2;  };};
@@ -70,37 +67,37 @@
         function numMod(n1) {  return function(n2) {    return n1 % n2;  };};
         function numNegate(n) {  return -n;};
         function $eq$eq(dict) {
-            return dict.$eq$eq;
+            return dict["=="];
         };
         function $div$eq(dict) {
-            return dict.$div$eq;
+            return dict["/="];
         };
         function refEq(r1) {  return function(r2) {    return r1 === r2;  };};
         function refIneq(r1) {  return function(r2) {    return r1 !== r2;  };};
         function compare(dict) {
-            return dict.compare;
+            return dict["compare"];
         };
         function numCompare(n1) {  return function(n2) {    return n1 < n2 ? module.LT : n1 > n2 ? module.GT : module.EQ;  };};
         function $amp(dict) {
-            return dict.$amp;
+            return dict["&"];
         };
         function $bar(dict) {
-            return dict.$bar;
+            return dict["|"];
         };
         function $up(dict) {
-            return dict.$up;
+            return dict["^"];
         };
         function shl(dict) {
-            return dict.shl;
+            return dict["shl"];
         };
         function shr(dict) {
-            return dict.shr;
+            return dict["shr"];
         };
         function zshr(dict) {
-            return dict.zshr;
+            return dict["zshr"];
         };
         function complement(dict) {
-            return dict.complement;
+            return dict["complement"];
         };
         function numShl(n1) {  return function(n2) {    return n1 << n2;  };};
         function numShr(n1) {  return function(n2) {    return n1 >> n2;  };};
@@ -111,248 +108,29 @@
         function numComplement(n) {  return ~n;};
         function $bang$bang(xs) {  return function(n) {    return xs[n];  };};
         function $amp$amp(dict) {
-            return dict.$amp$amp;
+            return dict["&&"];
         };
         function $bar$bar(dict) {
-            return dict.$bar$bar;
+            return dict["||"];
         };
         function not(dict) {
-            return dict.not;
+            return dict["not"];
         };
         function boolAnd(b1) {  return function(b2) {    return b1 && b2;  };};
         function boolOr(b1) {  return function(b2) {    return b1 || b2;  };};
         function boolNot(b) {  return !b;};
-        function $plus$plus(s1) {  return function(s2) {    return s1 + s2;  };};
-        var showString_show = function (s) {
-            return s;
+        function $less$greater(dict) {
+            return dict["<>"];
         };
-        var showString = function (_1) {
-            return {
-                show: showString_show
-            };
-        };
-        var showOrdering_show = function (_1) {
-            if (_1.ctor === "Prelude.LT") {
-                return "LT";
-            };
-            if (_1.ctor === "Prelude.GT") {
-                return "GT";
-            };
-            if (_1.ctor === "Prelude.EQ") {
-                return "EQ";
-            };
-            throw "Failed pattern match";
-        };
-        var showOrdering = function (_1) {
-            return {
-                show: showOrdering_show
-            };
-        };
-        var showNumber_show = showNumberImpl;
-        var showNumber = function (_1) {
-            return {
-                show: showNumber_show
-            };
-        };
-        var showBoolean_show = function (_1) {
-            if (_1) {
-                return "true";
-            };
-            if (!_1) {
-                return "false";
-            };
-            throw "Failed pattern match";
-        };
-        var showBoolean = function (_1) {
-            return {
-                show: showBoolean_show
-            };
-        };
-        var ordNumber_compare = numCompare;
-        var ordNumber = function (_1) {
-            return {
-                compare: ordNumber_compare
-            };
-        };
-        var on = function (f) {
-            return function (g) {
-                return function (x) {
-                    return function (y) {
-                        return f(g(x))(g(y));
-                    };
-                };
-            };
-        };
-        var numNumber_negate = numNegate;
-        var numNumber_$times = numMul;
-        var numNumber_$plus = numAdd;
-        var numNumber_$percent = numMod;
-        var numNumber_$minus = numSub;
-        var numNumber_$div = numDiv;
-        var numNumber = function (_1) {
-            return {
-                $plus: numNumber_$plus, 
-                $minus: numNumber_$minus, 
-                $times: numNumber_$times, 
-                $div: numNumber_$div, 
-                $percent: numNumber_$percent, 
-                negate: numNumber_negate
-            };
-        };
-        var functorFromApplicative_$less$dollar$greater = function (__dict_Applicative_0) {
-            return function (f) {
-                return function (a) {
-                    return $less$times$greater(__dict_Applicative_0)(pure(__dict_Applicative_0)(f))(a);
-                };
-            };
-        };
-        var functorFromApplicative = function (_1) {
-            return {
-                $less$dollar$greater: functorFromApplicative_$less$dollar$greater(_1)
-            };
-        };
-        var flip = function (f) {
-            return function (b) {
-                return function (a) {
-                    return f(a)(b);
-                };
-            };
-        };
-        var eqString_$eq$eq = refEq;
-        var eqString_$div$eq = refIneq;
-        var eqString = function (_1) {
-            return {
-                $eq$eq: eqString_$eq$eq, 
-                $div$eq: eqString_$div$eq
-            };
-        };
-        var eqNumber_$eq$eq = refEq;
-        var eqNumber_$div$eq = refIneq;
-        var eqNumber = function (_1) {
-            return {
-                $eq$eq: eqNumber_$eq$eq, 
-                $div$eq: eqNumber_$div$eq
-            };
-        };
-        var eqBoolean_$eq$eq = refEq;
-        var eqBoolean_$div$eq = refIneq;
-        var eqBoolean = function (_1) {
-            return {
-                $eq$eq: eqBoolean_$eq$eq, 
-                $div$eq: eqBoolean_$div$eq
-            };
-        };
-        var $$const = function (_1) {
-            return function (_2) {
-                return _1;
-                throw "Failed pattern match";
-            };
-        };
-        var categoryArr_id = function (x) {
-            return x;
-        };
-        var categoryArr_$less$less$less = function (f) {
-            return function (g) {
-                return function (x) {
-                    return f(g(x));
-                };
-            };
-        };
-        var categoryArr = function (_1) {
-            return {
-                id: categoryArr_id, 
-                $less$less$less: categoryArr_$less$less$less
-            };
-        };
-        var boolLikeBoolean_not = boolNot;
-        var boolLikeBoolean_$bar$bar = boolOr;
-        var boolLikeBoolean_$amp$amp = boolAnd;
-        var boolLikeBoolean = function (_1) {
-            return {
-                $amp$amp: boolLikeBoolean_$amp$amp, 
-                $bar$bar: boolLikeBoolean_$bar$bar, 
-                not: boolLikeBoolean_not
-            };
-        };
-        var eqArray_$eq$eq = function (__dict_Eq_1) {
-            return function (_1) {
-                return function (_2) {
-                    if (_1.length === 0) {
-                        if (_2.length === 0) {
-                            return true;
-                        };
-                    };
-                    if (_1.length > 0) {
-                        var _8 = _1.slice(1);
-                        if (_2.length > 0) {
-                            var _6 = _2.slice(1);
-                            return $amp$amp(boolLikeBoolean({}))($eq$eq(__dict_Eq_1)(_1[0])(_2[0]))($eq$eq(eqArray(__dict_Eq_1))(_8)(_6));
-                        };
-                    };
-                    return false;
-                    throw "Failed pattern match";
-                };
-            };
-        };
-        var eqArray = function (_1) {
-            return {
-                $eq$eq: eqArray_$eq$eq(_1), 
-                $div$eq: eqArray_$div$eq(_1)
-            };
-        };
-        var eqArray_$div$eq = function (__dict_Eq_2) {
-            return function (xs) {
-                return function (ys) {
-                    return not(boolLikeBoolean({}))($eq$eq(eqArray(__dict_Eq_2))(xs)(ys));
-                };
-            };
-        };
-        var bitsNumber_zshr = numZshr;
-        var bitsNumber_shr = numShr;
-        var bitsNumber_shl = numShl;
-        var bitsNumber_complement = numComplement;
-        var bitsNumber_$up = numXor;
-        var bitsNumber_$bar = numOr;
-        var bitsNumber_$amp = numAnd;
-        var bitsNumber = function (_1) {
-            return {
-                $amp: bitsNumber_$amp, 
-                $bar: bitsNumber_$bar, 
-                $up: bitsNumber_$up, 
-                shl: bitsNumber_shl, 
-                shr: bitsNumber_shr, 
-                zshr: bitsNumber_zshr, 
-                complement: bitsNumber_complement
-            };
-        };
-        var applicativeFromMonad_pure = function (__dict_Monad_3) {
-            return $$return(__dict_Monad_3);
-        };
-        var applicativeFromMonad_$less$times$greater = function (__dict_Monad_4) {
-            return function (f) {
-                return function (a) {
-                    return $greater$greater$eq(__dict_Monad_4)(f)(function (f$prime) {
-                        return $greater$greater$eq(__dict_Monad_4)(a)(function (a$prime) {
-                            return $$return(__dict_Monad_4)(f$prime(a$prime));
-                        });
-                    });
-                };
-            };
-        };
-        var applicativeFromMonad = function (_1) {
-            return {
-                pure: applicativeFromMonad_pure(_1), 
-                $less$times$greater: applicativeFromMonad_$less$times$greater(_1)
-            };
-        };
-        var $greater$greater$greater = function (__dict_Category_5) {
+        function concatString(s1) {  return function(s2) {    return s1 + s2;  };};
+        var $greater$greater$greater = function (__dict_Category_0) {
             return function (f) {
                 return function (g) {
-                    return $less$less$less(__dict_Category_5)(g)(f);
+                    return $less$less$less(__dict_Category_0)(g)(f);
                 };
             };
         };
-        var $greater$eq = function (__dict_Ord_6) {
+        var $greater$eq = function (__dict_Ord_1) {
             return function (a1) {
                 return function (a2) {
                     return (function (_1) {
@@ -360,12 +138,11 @@
                             return false;
                         };
                         return true;
-                        throw "Failed pattern match";
-                    })(compare(__dict_Ord_6)(a1)(a2));
+                    })(compare(__dict_Ord_1)(a1)(a2));
                 };
             };
         };
-        var $greater = function (__dict_Ord_7) {
+        var $greater = function (__dict_Ord_2) {
             return function (a1) {
                 return function (a2) {
                     return (function (_1) {
@@ -373,12 +150,11 @@
                             return true;
                         };
                         return false;
-                        throw "Failed pattern match";
-                    })(compare(__dict_Ord_7)(a1)(a2));
+                    })(compare(__dict_Ord_2)(a1)(a2));
                 };
             };
         };
-        var $less$eq = function (__dict_Ord_8) {
+        var $less$eq = function (__dict_Ord_3) {
             return function (a1) {
                 return function (a2) {
                     return (function (_1) {
@@ -386,12 +162,11 @@
                             return false;
                         };
                         return true;
-                        throw "Failed pattern match";
-                    })(compare(__dict_Ord_8)(a1)(a2));
+                    })(compare(__dict_Ord_3)(a1)(a2));
                 };
             };
         };
-        var $less = function (__dict_Ord_9) {
+        var $less = function (__dict_Ord_4) {
             return function (a1) {
                 return function (a2) {
                     return (function (_1) {
@@ -399,10 +174,12 @@
                             return true;
                         };
                         return false;
-                        throw "Failed pattern match";
-                    })(compare(__dict_Ord_9)(a1)(a2));
+                    })(compare(__dict_Ord_4)(a1)(a2));
                 };
             };
+        };
+        var $plus$plus = function (__dict_Semigroup_5) {
+            return $less$greater(__dict_Semigroup_5);
         };
         var $dollar = function (f) {
             return function (x) {
@@ -414,10 +191,253 @@
                 return f(x);
             };
         };
+        var showString = function (_) {
+            return {
+                "__superclasses": {}, 
+                show: function (s) {
+                    return s;
+                }
+            };
+        };
+        var showOrdering = function (_) {
+            return {
+                "__superclasses": {}, 
+                show: function (_1) {
+                    if (_1.ctor === "Prelude.LT") {
+                        return "LT";
+                    };
+                    if (_1.ctor === "Prelude.GT") {
+                        return "GT";
+                    };
+                    if (_1.ctor === "Prelude.EQ") {
+                        return "EQ";
+                    };
+                    throw "Failed pattern match";
+                }
+            };
+        };
+        var showNumber = function (_) {
+            return {
+                "__superclasses": {}, 
+                show: showNumberImpl
+            };
+        };
+        var showBoolean = function (_) {
+            return {
+                "__superclasses": {}, 
+                show: function (_1) {
+                    if (_1) {
+                        return "true";
+                    };
+                    if (!_1) {
+                        return "false";
+                    };
+                    throw "Failed pattern match";
+                }
+            };
+        };
+        var semigroupString = function (_) {
+            return {
+                "__superclasses": {}, 
+                "<>": concatString
+            };
+        };
+        var $$return = function (__dict_Monad_6) {
+            return pure(__dict_Monad_6["__superclasses"]["Prelude.Applicative_0"]({}));
+        };
+        var on = function (f) {
+            return function (g) {
+                return function (x) {
+                    return function (y) {
+                        return f(g(x))(g(y));
+                    };
+                };
+            };
+        };
+        var numNumber = function (_) {
+            return {
+                "__superclasses": {}, 
+                "+": numAdd, 
+                "-": numSub, 
+                "*": numMul, 
+                "/": numDiv, 
+                "%": numMod, 
+                negate: numNegate
+            };
+        };
+        var liftM1 = function (__dict_Monad_7) {
+            return function (f) {
+                return function (a) {
+                    return $greater$greater$eq(__dict_Monad_7["__superclasses"]["Prelude.Bind_1"]({}))(a)(function (_1) {
+                        return $$return(__dict_Monad_7)(f(_1));
+                    });
+                };
+            };
+        };
+        var liftA1 = function (__dict_Applicative_8) {
+            return function (f) {
+                return function (a) {
+                    return $less$times$greater(__dict_Applicative_8["__superclasses"]["Prelude.Apply_0"]({}))(pure(__dict_Applicative_8)(f))(a);
+                };
+            };
+        };
+        var flip = function (f) {
+            return function (b) {
+                return function (a) {
+                    return f(a)(b);
+                };
+            };
+        };
+        var eqString = function (_) {
+            return {
+                "__superclasses": {}, 
+                "==": refEq, 
+                "/=": refIneq
+            };
+        };
+        var eqNumber = function (_) {
+            return {
+                "__superclasses": {}, 
+                "==": refEq, 
+                "/=": refIneq
+            };
+        };
+        var ordNumber = function (_) {
+            return {
+                "__superclasses": {
+                    "Prelude.Eq_0": function (_) {
+                        return eqNumber({});
+                    }
+                }, 
+                compare: numCompare
+            };
+        };
+        var eqBoolean = function (_) {
+            return {
+                "__superclasses": {}, 
+                "==": refEq, 
+                "/=": refIneq
+            };
+        };
+        var $$const = function (_1) {
+            return function (_2) {
+                return _1;
+            };
+        };
+        var categoryArr = function (_) {
+            return {
+                "__superclasses": {}, 
+                id: function (x) {
+                    return x;
+                }, 
+                "<<<": function (f) {
+                    return function (g) {
+                        return function (x) {
+                            return f(g(x));
+                        };
+                    };
+                }
+            };
+        };
+        var boolLikeBoolean = function (_) {
+            return {
+                "__superclasses": {}, 
+                "&&": boolAnd, 
+                "||": boolOr, 
+                not: boolNot
+            };
+        };
+        var eqArray = function (__dict_Eq_9) {
+            return {
+                "__superclasses": {}, 
+                "==": function (_1) {
+                    return function (_2) {
+                        if (_1.length === 0) {
+                            if (_2.length === 0) {
+                                return true;
+                            };
+                        };
+                        if (_1.length > 0) {
+                            var _8 = _1.slice(1);
+                            if (_2.length > 0) {
+                                var _6 = _2.slice(1);
+                                return $amp$amp(boolLikeBoolean({}))($eq$eq(__dict_Eq_9)(_1[0])(_2[0]))($eq$eq(eqArray(__dict_Eq_9))(_8)(_6));
+                            };
+                        };
+                        return false;
+                    };
+                }, 
+                "/=": function (xs) {
+                    return function (ys) {
+                        return not(boolLikeBoolean({}))($eq$eq(eqArray(__dict_Eq_9))(xs)(ys));
+                    };
+                }
+            };
+        };
+        var eqOrdering = function (_) {
+            return {
+                "__superclasses": {}, 
+                "==": function (_1) {
+                    return function (_2) {
+                        if (_1.ctor === "Prelude.LT") {
+                            if (_2.ctor === "Prelude.LT") {
+                                return true;
+                            };
+                        };
+                        if (_1.ctor === "Prelude.GT") {
+                            if (_2.ctor === "Prelude.GT") {
+                                return true;
+                            };
+                        };
+                        if (_1.ctor === "Prelude.EQ") {
+                            if (_2.ctor === "Prelude.EQ") {
+                                return true;
+                            };
+                        };
+                        return false;
+                    };
+                }, 
+                "/=": function (x) {
+                    return function (y) {
+                        return not(boolLikeBoolean({}))($eq$eq(eqOrdering({}))(x)(y));
+                    };
+                }
+            };
+        };
+        var bitsNumber = function (_) {
+            return {
+                "__superclasses": {}, 
+                "&": numAnd, 
+                "|": numOr, 
+                "^": numXor, 
+                shl: numShl, 
+                shr: numShr, 
+                zshr: numZshr, 
+                complement: numComplement
+            };
+        };
+        var asTypeOf = function (_1) {
+            return function (_2) {
+                return _1;
+            };
+        };
+        var ap = function (__dict_Monad_10) {
+            return function (f) {
+                return function (a) {
+                    return $greater$greater$eq(__dict_Monad_10["__superclasses"]["Prelude.Bind_1"]({}))(f)(function (_2) {
+                        return $greater$greater$eq(__dict_Monad_10["__superclasses"]["Prelude.Bind_1"]({}))(a)(function (_1) {
+                            return $$return(__dict_Monad_10)(_2(_1));
+                        });
+                    });
+                };
+            };
+        };
         module.LT = LT;
         module.GT = GT;
         module.EQ = EQ;
         module["++"] = $plus$plus;
+        module.concatString = concatString;
+        module["<>"] = $less$greater;
         module.boolNot = boolNot;
         module.boolOr = boolOr;
         module.boolAnd = boolAnd;
@@ -461,12 +481,15 @@
         module["*"] = $times;
         module["-"] = $minus;
         module["+"] = $plus;
-        module[">>="] = $greater$greater$eq;
+        module.ap = ap;
+        module.liftM1 = liftM1;
         module["return"] = $$return;
+        module[">>="] = $greater$greater$eq;
         module["<|>"] = $less$bar$greater;
         module.empty = empty;
-        module["<*>"] = $less$times$greater;
+        module.liftA1 = liftA1;
         module.pure = pure;
+        module["<*>"] = $less$times$greater;
         module["<$>"] = $less$dollar$greater;
         module.showNumberImpl = showNumberImpl;
         module.show = show;
@@ -475,6 +498,7 @@
         module[">>>"] = $greater$greater$greater;
         module["<<<"] = $less$less$less;
         module.id = id;
+        module.asTypeOf = asTypeOf;
         module.on = on;
         module["const"] = $$const;
         module.flip = flip;
@@ -482,17 +506,17 @@
         module.showString = showString;
         module.showBoolean = showBoolean;
         module.showNumber = showNumber;
-        module.functorFromApplicative = functorFromApplicative;
-        module.applicativeFromMonad = applicativeFromMonad;
         module.numNumber = numNumber;
         module.eqString = eqString;
         module.eqNumber = eqNumber;
         module.eqBoolean = eqBoolean;
         module.eqArray = eqArray;
+        module.eqOrdering = eqOrdering;
         module.showOrdering = showOrdering;
         module.ordNumber = ordNumber;
         module.bitsNumber = bitsNumber;
         module.boolLikeBoolean = boolLikeBoolean;
+        module.semigroupString = semigroupString;
         return module;
     })();
 })((typeof module !== "undefined" && module.exports) ? module.exports : (typeof window !== "undefined") ? window.PS = window.PS || {} : (function () {

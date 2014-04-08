@@ -12,16 +12,14 @@
             return function (_2) {
                 return function (_3) {
                     return _1(_2.values[0])(_3.values[0]);
-                    throw "Failed pattern match";
                 };
             };
         };
-        var eqRef_$eq$eq = liftRef(_ps.Prelude.refEq);
-        var eqRef_$div$eq = liftRef(_ps.Prelude.refIneq);
-        var eqRef = function (_1) {
+        var eqRef = function (_) {
             return {
-                $eq$eq: eqRef_$eq$eq, 
-                $div$eq: eqRef_$div$eq
+                "__superclasses": {}, 
+                "==": liftRef(_ps.Prelude.refEq), 
+                "/=": liftRef(_ps.Prelude.refIneq)
             };
         };
         module.Ref = Ref;

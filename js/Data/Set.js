@@ -21,14 +21,12 @@
             };
             throw "Failed pattern match";
         };
-        var showSet_show = function (__dict_Show_0) {
-            return function (s) {
-                return "fromList " + _ps.Prelude.show(_ps.Data_Array.showArray(__dict_Show_0))(toList(s));
-            };
-        };
-        var showSet = function (_1) {
+        var showSet = function (__dict_Show_0) {
             return {
-                show: showSet_show(_1)
+                "__superclasses": {}, 
+                show: function (s) {
+                    return "fromList " + _ps.Prelude.show(_ps.Data_Array.showArray(__dict_Show_0))(toList(s));
+                }
             };
         };
         var member = function (__copy___dict_Eq_1) {
@@ -100,24 +98,19 @@
                 };
             };
         };
-        var eqSet_$eq$eq = function (__dict_Eq_4) {
-            return function (s1) {
-                return function (s2) {
-                    return _ps.Prelude["=="](_ps.Prelude.eqArray(__dict_Eq_4))(toList(s1))(toList(s2));
-                };
-            };
-        };
-        var eqSet = function (_1) {
+        var eqSet = function (__dict_Eq_4) {
             return {
-                $eq$eq: eqSet_$eq$eq(_1), 
-                $div$eq: eqSet_$div$eq(_1)
-            };
-        };
-        var eqSet_$div$eq = function (__dict_Eq_5) {
-            return function (s1) {
-                return function (s2) {
-                    return !_ps.Prelude["=="](eqSet(__dict_Eq_5))(s1)(s2);
-                };
+                "__superclasses": {}, 
+                "==": function (s1) {
+                    return function (s2) {
+                        return _ps.Prelude["=="](_ps.Prelude.eqArray(__dict_Eq_4))(toList(s1))(toList(s2));
+                    };
+                }, 
+                "/=": function (s1) {
+                    return function (s2) {
+                        return !_ps.Prelude["=="](eqSet(__dict_Eq_4))(s1)(s2);
+                    };
+                }
             };
         };
         var empty = Leaf;
@@ -128,8 +121,8 @@
                 right: empty
             });
         };
-        var insert = function (__dict_Eq_6) {
-            return function (__dict_Ord_7) {
+        var insert = function (__dict_Eq_5) {
+            return function (__dict_Ord_6) {
                 return function (_1) {
                     return function (_2) {
                         return (function (_3, _4) {
@@ -137,12 +130,12 @@
                                 return singleton(_3);
                             };
                             if (_4.ctor === "Data.Set.Branch") {
-                                if (_ps.Prelude["=="](__dict_Eq_6)(_3)((_4.values[0]).value)) {
+                                if (_ps.Prelude["=="](__dict_Eq_5)(_3)((_4.values[0]).value)) {
                                     return Branch(_4.values[0]);
                                 };
                             };
                             if (_4.ctor === "Data.Set.Branch") {
-                                if (_ps.Prelude["<"](__dict_Ord_7)(_3)((_4.values[0]).value)) {
+                                if (_ps.Prelude["<"](__dict_Ord_6)(_3)((_4.values[0]).value)) {
                                     return Branch((function () {
                                         var _1 = {};
                                         for (var _2 in _4.values[0]) {
@@ -150,7 +143,7 @@
                                                 _1[_2] = _4.values[0][_2];
                                             };
                                         };
-                                        _1.left = insert(__dict_Eq_6)(__dict_Ord_7)(_3)((_4.values[0]).left);
+                                        _1.left = insert(__dict_Eq_5)(__dict_Ord_6)(_3)((_4.values[0]).left);
                                         return _1;
                                     })());
                                 };
@@ -163,7 +156,7 @@
                                             _1[_2] = _4.values[0][_2];
                                         };
                                     };
-                                    _1.right = insert(__dict_Eq_6)(__dict_Ord_7)(_3)((_4.values[0]).right);
+                                    _1.right = insert(__dict_Eq_5)(__dict_Ord_6)(_3)((_4.values[0]).right);
                                     return _1;
                                 })());
                             };
@@ -173,30 +166,30 @@
                 };
             };
         };
-        var fromList = function (__dict_Eq_8) {
-            return function (__dict_Ord_9) {
+        var fromList = function (__dict_Eq_7) {
+            return function (__dict_Ord_8) {
                 return _ps.Data_Foldable.foldl(_ps.Data_Foldable.foldableArray({}))(function (s) {
                     return function (a) {
-                        return insert(__dict_Eq_8)(__dict_Ord_9)(a)(s);
+                        return insert(__dict_Eq_7)(__dict_Ord_8)(a)(s);
                     };
                 })(empty);
             };
         };
-        var union = function (__dict_Eq_10) {
-            return function (__dict_Ord_11) {
+        var union = function (__dict_Eq_9) {
+            return function (__dict_Ord_10) {
                 return function (s1) {
                     return function (s2) {
                         return _ps.Data_Foldable.foldl(_ps.Data_Foldable.foldableArray({}))(function (s) {
                             return function (a) {
-                                return insert(__dict_Eq_10)(__dict_Ord_11)(a)(s);
+                                return insert(__dict_Eq_9)(__dict_Ord_10)(a)(s);
                             };
                         })(s2)(toList(s1));
                     };
                 };
             };
         };
-        var $$delete = function (__dict_Eq_12) {
-            return function (__dict_Ord_13) {
+        var $$delete = function (__dict_Eq_11) {
+            return function (__dict_Ord_12) {
                 return function (_1) {
                     return function (_2) {
                         return (function (_3, _4) {
@@ -206,7 +199,7 @@
                             var a = _3;
                             if (_4.ctor === "Data.Set.Branch") {
                                 if ((_4.values[0]).left.ctor === "Data.Set.Leaf") {
-                                    if (_ps.Prelude["=="](__dict_Eq_12)(a)((_4.values[0]).value)) {
+                                    if (_ps.Prelude["=="](__dict_Eq_11)(a)((_4.values[0]).value)) {
                                         return (function (_1) {
                                             var _2 = _1.left;
                                             if (_2.ctor === "Data.Set.Leaf") {
@@ -217,7 +210,7 @@
                                                 return (_4.values[0]).left;
                                             };
                                             return (function () {
-                                                var minValue = findMinValue(__dict_Ord_13)((_4.values[0]).right);
+                                                var minValue = findMinValue(__dict_Ord_12)((_4.values[0]).right);
                                                 return Branch((function () {
                                                     var _1 = {};
                                                     for (var _2 in _4.values[0]) {
@@ -226,17 +219,16 @@
                                                         };
                                                     };
                                                     _1.value = minValue;
-                                                    _1.right = $$delete(__dict_Eq_12)(__dict_Ord_13)(minValue)((_4.values[0]).right);
+                                                    _1.right = $$delete(__dict_Eq_11)(__dict_Ord_12)(minValue)((_4.values[0]).right);
                                                     return _1;
                                                 })());
                                             })();
-                                            throw "Failed pattern match";
                                         })(_4.values[0]);
                                     };
                                 };
                             };
                             if (_4.ctor === "Data.Set.Branch") {
-                                if (_ps.Prelude["<"](__dict_Ord_13)(_3)((_4.values[0]).value)) {
+                                if (_ps.Prelude["<"](__dict_Ord_12)(_3)((_4.values[0]).value)) {
                                     return Branch((function () {
                                         var _1 = {};
                                         for (var _2 in _4.values[0]) {
@@ -244,7 +236,7 @@
                                                 _1[_2] = _4.values[0][_2];
                                             };
                                         };
-                                        _1.left = $$delete(__dict_Eq_12)(__dict_Ord_13)(_3)((_4.values[0]).left);
+                                        _1.left = $$delete(__dict_Eq_11)(__dict_Ord_12)(_3)((_4.values[0]).left);
                                         return _1;
                                     })());
                                 };
@@ -257,7 +249,7 @@
                                             _1[_2] = _4.values[0][_2];
                                         };
                                     };
-                                    _1.right = $$delete(__dict_Eq_12)(__dict_Ord_13)(_3)((_4.values[0]).right);
+                                    _1.right = $$delete(__dict_Eq_11)(__dict_Ord_12)(_3)((_4.values[0]).right);
                                     return _1;
                                 })());
                             };

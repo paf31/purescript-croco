@@ -6,8 +6,6 @@ module.exports = function(grunt) {
     
         "purescript-make": {
             options: {
-                tco: true,
-                magicDo: true
             },
             main: {
                 files: {

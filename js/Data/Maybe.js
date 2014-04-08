@@ -12,23 +12,20 @@
                 values: [ value0 ]
             };
         };
-        var showMaybe_show = function (__dict_Show_0) {
-            return function (_1) {
-                if (_1.ctor === "Data.Maybe.Just") {
-                    return "Just " + _ps.Prelude.show(__dict_Show_0)(_1.values[0]);
-                };
-                if (_1.ctor === "Data.Maybe.Nothing") {
-                    return "Nothing";
-                };
-                throw "Failed pattern match";
-            };
-        };
-        var showMaybe = function (_1) {
+        var showMaybe = function (__dict_Show_0) {
             return {
-                show: showMaybe_show(_1)
+                "__superclasses": {}, 
+                show: function (_1) {
+                    if (_1.ctor === "Data.Maybe.Just") {
+                        return "Just " + _ps.Prelude.show(__dict_Show_0)(_1.values[0]);
+                    };
+                    if (_1.ctor === "Data.Maybe.Nothing") {
+                        return "Nothing";
+                    };
+                    throw "Failed pattern match";
+                }
             };
         };
-        var monadMaybe_$$return = Just;
         var maybe = function (_1) {
             return function (_2) {
                 return function (_3) {
@@ -42,83 +39,153 @@
                 };
             };
         };
-        var monadMaybe_$greater$greater$eq = function (m) {
-            return function (f) {
-                return maybe(Nothing)(f)(m);
-            };
-        };
-        var monadMaybe = function (_1) {
-            return {
-                $$return: monadMaybe_$$return, 
-                $greater$greater$eq: monadMaybe_$greater$greater$eq
-            };
-        };
         var isNothing = maybe(true)(_ps.Prelude["const"](false));
         var isJust = maybe(false)(_ps.Prelude["const"](true));
-        var functorMaybe_$less$dollar$greater = function (_1) {
-            return function (_2) {
-                if (_2.ctor === "Data.Maybe.Just") {
-                    return Just(_1(_2.values[0]));
-                };
-                return Nothing;
-                throw "Failed pattern match";
-            };
-        };
-        var functorMaybe = function (_1) {
+        var functorMaybe = function (_) {
             return {
-                $less$dollar$greater: functorMaybe_$less$dollar$greater
+                "__superclasses": {}, 
+                "<$>": function (_1) {
+                    return function (_2) {
+                        if (_2.ctor === "Data.Maybe.Just") {
+                            return Just(_1(_2.values[0]));
+                        };
+                        return Nothing;
+                    };
+                }
             };
         };
         var fromMaybe = function (a) {
             return maybe(a)(_ps.Prelude.id(_ps.Prelude.categoryArr({})));
         };
-        var eqMaybe_$eq$eq = function (__dict_Eq_1) {
-            return function (_1) {
-                return function (_2) {
-                    if (_1.ctor === "Data.Maybe.Nothing") {
+        var eqMaybe = function (__dict_Eq_2) {
+            return {
+                "__superclasses": {}, 
+                "==": function (_1) {
+                    return function (_2) {
+                        if (_1.ctor === "Data.Maybe.Nothing") {
+                            if (_2.ctor === "Data.Maybe.Nothing") {
+                                return true;
+                            };
+                        };
+                        if (_1.ctor === "Data.Maybe.Just") {
+                            if (_2.ctor === "Data.Maybe.Just") {
+                                return _ps.Prelude["=="](__dict_Eq_2)(_1.values[0])(_2.values[0]);
+                            };
+                        };
+                        return false;
+                    };
+                }, 
+                "/=": function (a) {
+                    return function (b) {
+                        return !_ps.Prelude["=="](eqMaybe(__dict_Eq_2))(a)(b);
+                    };
+                }
+            };
+        };
+        var ordMaybe = function (__dict_Ord_1) {
+            return {
+                "__superclasses": {
+                    "Prelude.Eq_0": function (_) {
+                        return eqMaybe(__dict_Ord_1["__superclasses"]["Prelude.Eq_0"]({}));
+                    }
+                }, 
+                compare: function (_1) {
+                    return function (_2) {
+                        if (_1.ctor === "Data.Maybe.Just") {
+                            if (_2.ctor === "Data.Maybe.Just") {
+                                return _ps.Prelude.compare(__dict_Ord_1)(_1.values[0])(_2.values[0]);
+                            };
+                        };
+                        if (_1.ctor === "Data.Maybe.Nothing") {
+                            if (_2.ctor === "Data.Maybe.Nothing") {
+                                return _ps.Prelude.EQ;
+                            };
+                        };
+                        if (_1.ctor === "Data.Maybe.Nothing") {
+                            return _ps.Prelude.LT;
+                        };
                         if (_2.ctor === "Data.Maybe.Nothing") {
-                            return true;
+                            return _ps.Prelude.GT;
                         };
+                        throw "Failed pattern match";
                     };
-                    if (_1.ctor === "Data.Maybe.Just") {
-                        if (_2.ctor === "Data.Maybe.Just") {
-                            return _ps.Prelude["=="](__dict_Eq_1)(_1.values[0])(_2.values[0]);
+                }
+            };
+        };
+        var applyMaybe = function (_) {
+            return {
+                "__superclasses": {
+                    "Prelude.Functor_0": function (_) {
+                        return functorMaybe({});
+                    }
+                }, 
+                "<*>": function (_1) {
+                    return function (_2) {
+                        if (_1.ctor === "Data.Maybe.Just") {
+                            return _ps.Prelude["<$>"](functorMaybe({}))(_1.values[0])(_2);
                         };
+                        if (_1.ctor === "Data.Maybe.Nothing") {
+                            return Nothing;
+                        };
+                        throw "Failed pattern match";
                     };
-                    return false;
-                    throw "Failed pattern match";
-                };
+                }
             };
         };
-        var eqMaybe = function (_1) {
+        var bindMaybe = function (_) {
             return {
-                $eq$eq: eqMaybe_$eq$eq(_1), 
-                $div$eq: eqMaybe_$div$eq(_1)
+                "__superclasses": {
+                    "Prelude.Apply_0": function (_) {
+                        return applyMaybe({});
+                    }
+                }, 
+                ">>=": function (_1) {
+                    return function (_2) {
+                        if (_1.ctor === "Data.Maybe.Just") {
+                            return _2(_1.values[0]);
+                        };
+                        if (_1.ctor === "Data.Maybe.Nothing") {
+                            return Nothing;
+                        };
+                        throw "Failed pattern match";
+                    };
+                }
             };
         };
-        var eqMaybe_$div$eq = function (__dict_Eq_2) {
-            return function (a) {
-                return function (b) {
-                    return !_ps.Prelude["=="](eqMaybe(__dict_Eq_2))(a)(b);
-                };
-            };
-        };
-        var applicativeMaybe_pure = Just;
-        var applicativeMaybe_$less$times$greater = function (_1) {
-            return function (_2) {
-                if (_1.ctor === "Data.Maybe.Just") {
-                    return _ps.Prelude["<$>"](functorMaybe({}))(_1.values[0])(_2);
-                };
-                if (_1.ctor === "Data.Maybe.Nothing") {
-                    return Nothing;
-                };
-                throw "Failed pattern match";
-            };
-        };
-        var applicativeMaybe = function (_1) {
+        var applicativeMaybe = function (_) {
             return {
-                pure: applicativeMaybe_pure, 
-                $less$times$greater: applicativeMaybe_$less$times$greater
+                "__superclasses": {
+                    "Prelude.Apply_0": function (_) {
+                        return applyMaybe({});
+                    }
+                }, 
+                pure: Just
+            };
+        };
+        var monadMaybe = function (_) {
+            return {
+                "__superclasses": {
+                    "Prelude.Applicative_0": function (_) {
+                        return applicativeMaybe({});
+                    }, 
+                    "Prelude.Bind_1": function (_) {
+                        return bindMaybe({});
+                    }
+                }
+            };
+        };
+        var alternativeMaybe = function (_) {
+            return {
+                "__superclasses": {}, 
+                empty: Nothing, 
+                "<|>": function (_1) {
+                    return function (_2) {
+                        if (_1.ctor === "Data.Maybe.Nothing") {
+                            return _2;
+                        };
+                        return _1;
+                    };
+                }
             };
         };
         module.Nothing = Nothing;
@@ -127,11 +194,15 @@
         module.isJust = isJust;
         module.fromMaybe = fromMaybe;
         module.maybe = maybe;
-        module.monadMaybe = monadMaybe;
-        module.applicativeMaybe = applicativeMaybe;
         module.functorMaybe = functorMaybe;
+        module.applyMaybe = applyMaybe;
+        module.applicativeMaybe = applicativeMaybe;
+        module.alternativeMaybe = alternativeMaybe;
+        module.bindMaybe = bindMaybe;
+        module.monadMaybe = monadMaybe;
         module.showMaybe = showMaybe;
         module.eqMaybe = eqMaybe;
+        module.ordMaybe = ordMaybe;
         return module;
     })();
 })((typeof module !== "undefined" && module.exports) ? module.exports : (typeof window !== "undefined") ? window.PS = window.PS || {} : (function () {
