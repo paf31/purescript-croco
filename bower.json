@@ -18,7 +18,11 @@
   ],
   "dependencies": {
     "purescript-canvas": "*",
-    "purescript-strings": "*"
+    "purescript-strings": "*",
+    "purescript-arrays": "*",
+    "purescript-maps": "*",
+    "purescript-foldable-traversable": "*",
+    "purescript-refs": "*"
   },
   "homepage": "https://github.com/paf31/purescript-croco"
 }

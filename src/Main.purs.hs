@@ -4,7 +4,7 @@ import Data.Array
 import Data.Maybe
 import Data.Tuple
 import qualified Data.String as S
-import Data.Foldable
+import Data.Foldable (mconcat)
 import Data.Traversable
 import Data.Monoid
 import Data.Monoid.First
@@ -173,7 +173,7 @@ collide state _ _ Red =
 collide state key _ Green = 
   let 
     newMaze = M.delete key state.maze
-    newStatus = if isEmpty <<< filter ((==) Green) <<< map snd $ M.toList state.maze then GameOver else InProgress 
+    newStatus = if null <<< filter ((==) Green) <<< map snd $ M.toList state.maze then GameOver else InProgress 
   in case state.direction of
     MovingLeft  -> state { maze = newMaze, direction = MovingRight, status = newStatus }
     MovingRight -> state { maze = newMaze, direction = MovingLeft, status = newStatus }
