@@ -143,15 +143,19 @@ applyKeyState state d = case state.keyState of
   MovingUp -> 
     let 
       nearestBrick x y = Tuple (Math.round x) (Math.floor y)
-      location = nearestBrick state.posX (state.posY - d)
+      newY = state.posY - d
+      location = nearestBrick state.posX newY 
       brick = M.lookup location state.maze
-    in if brick == Just White then state.posY else state.posY - d
+      clipped = if brick == Just White then Math.max newY (Math.floor newY + 0.7) else newY 
+    in clipped
   MovingDown ->
     let 
       nearestBrick x y = Tuple (Math.round x) (Math.ceil y)
-      location = nearestBrick state.posX (state.posY + d) 
+      newY = state.posY + d
+      location = nearestBrick state.posX newY 
       brick = M.lookup location state.maze 
-    in if brick == Just White then state.posY else state.posY + d
+      clipped = if brick == Just White then Math.min newY (Math.ceil newY - 0.7) else newY
+    in clipped
   NoKeyState -> state.posY
 
 moveBall :: GameState -> Time -> Tuple Coord Coord
@@ -249,10 +253,11 @@ brick ctx Green = box ctx "#ff0000" "#0000ff"
   
 maze :: forall eff. Context2D -> Maze -> Eff (canvas :: Canvas | eff) Context2D
 maze ctx m = do
-  for (M.toList m) $ \(Tuple (Tuple x y) b) -> withContext ctx $ do
+  foreachE (M.toList m) $ \(Tuple (Tuple x y) b) -> withContext ctx $ do
     translate { translateX: x, translateY: y } ctx
     scale { scaleX: 0.4, scaleY: 0.4 } ctx
     brick ctx b
+    return unit
   return ctx
   
 ball :: forall eff. Context2D -> Coord -> Coord -> Eff (canvas :: Canvas | eff) Context2D
@@ -279,17 +284,17 @@ render ctx stateRef = do
   let state'' = state' { lastTime = Just time }
   writeRef stateRef state''
   setFillStyle "#000000" ctx
-  clearRect ctx { x: 0, y: 0, w: 640, h: 480 } 
+  clearRect ctx { x: 0, y: 0, w: 800, h: 600 } 
   withContext ctx $ do
-    translate { translateX: 320, translateY: 240 } ctx
-    scale { scaleX: 40, scaleY: 40 } ctx
+    translate { translateX: 400, translateY: 300 } ctx
+    scale { scaleX: 50, scaleY: 50 } ctx
     translate 
       { translateX: negate (state''.posX)
       , translateY: negate (state''.posY)
       } ctx 
     maze ctx state''.maze
     ball ctx state''.posX state''.posY
-  return unit 
+  requestAnimationFrame $ render ctx stateRef
 
 foreign import getElementById
   "function getElementById(id) {\
@@ -298,16 +303,12 @@ foreign import getElementById
   \  };\
   \}" :: forall eff. String -> Eff eff CanvasElement
 
-foreign import setInterval 
-  "function setInterval(t) {\
-  \  return function(action) {\
-  \    return function() {\
-  \      window.setInterval(function() {\
-  \        action();\
-  \      }, t);\
-  \    };\
+foreign import requestAnimationFrame 
+  "function requestAnimationFrame(action) {\
+  \  return function() {\
+  \    window.requestAnimationFrame(action);\
   \  };\
-  \}" :: forall eff. Number -> Eff eff Unit -> Eff eff Unit
+  \}" :: forall eff. Eff eff Unit -> Eff eff Unit
 
 foreign import onKeyDown
   "function onKeyDown(handler) {\
@@ -333,4 +334,4 @@ main = do
   onKeyUp $ handleKeyUp stateRef
   canvas <- getElementById "canvas"
   ctx <- getContext2D canvas
-  setInterval 10 $ render ctx stateRef
+  render ctx stateRef
