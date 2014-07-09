@@ -191,12 +191,12 @@ tick state elapsedTime = do
     GameOver -> state
     InProgress -> updateGameState state elapsedTime
 
-changeKeyState :: forall eff. RefVal GameState -> KeyState -> Eff (ref :: Ref | eff) {}
+changeKeyState :: forall eff. RefVal GameState -> KeyState -> Eff (ref :: Ref | eff) Unit 
 changeKeyState stateRef newState = do
   state <- readRef stateRef
   case state.status of 
     InProgress -> modifyRef stateRef $ \st -> st { keyState = newState }
-    _ -> return {}
+    _ -> return unit
 
 handleKeyDown :: forall eff. RefVal GameState -> KeyCode -> Eff (ref :: Ref | eff) Boolean
 handleKeyDown stateRef 38 = do
@@ -269,7 +269,7 @@ foreign import getMillis
   \  return new Date().getTime();\
   \}" :: forall eff. Eff (time :: ETime | eff) Number
 
-render :: forall eff. Context2D -> RefVal GameState -> Eff (time :: ETime, canvas :: Canvas, ref :: Ref | eff) {}
+render :: forall eff. Context2D -> RefVal GameState -> Eff (time :: ETime, canvas :: Canvas, ref :: Ref | eff) Unit 
 render ctx stateRef = do
   state <- readRef stateRef
   time <- getMillis
@@ -289,7 +289,7 @@ render ctx stateRef = do
       } ctx 
     maze ctx state''.maze
     ball ctx state''.posX state''.posY
-  return {}
+  return unit 
 
 foreign import getElementById
   "function getElementById(id) {\
@@ -307,7 +307,7 @@ foreign import setInterval
   \      }, t);\
   \    };\
   \  };\
-  \}" :: forall eff. Number -> Eff eff {} -> Eff eff {}
+  \}" :: forall eff. Number -> Eff eff Unit -> Eff eff Unit
 
 foreign import onKeyDown
   "function onKeyDown(handler) {\
@@ -316,7 +316,7 @@ foreign import onKeyDown
   \      return handler(e.keyCode)();\
   \    };\
   \  };\
-  \}" :: forall eff. (KeyCode -> Eff eff Boolean) -> Eff eff {}
+  \}" :: forall eff. (KeyCode -> Eff eff Boolean) -> Eff eff Unit 
 
 foreign import onKeyUp
   "function onKeyUp(handler) {\
@@ -325,7 +325,7 @@ foreign import onKeyUp
   \      return handler(e.keyCode)();\
   \    };\
   \  };\
-  \}" :: forall eff. (KeyCode -> Eff eff Boolean) -> Eff eff {}
+  \}" :: forall eff. (KeyCode -> Eff eff Boolean) -> Eff eff Unit 
 
 main = do
   stateRef <- newRef defaultGameState
